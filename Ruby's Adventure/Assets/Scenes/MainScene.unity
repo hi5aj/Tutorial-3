@@ -375,6 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 249125659}
   - component: {fileID: 249125658}
+  - component: {fileID: 249125660}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
@@ -392,7 +393,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e406c04157c663a43b859646b7ad3c2a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.15
   m_Pitch: 1
@@ -493,6 +494,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 52
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &249125660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249125657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77eaed7842bea804faedd33b9e11b737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 249125658}
+  backgroundMusic: {fileID: 8300000, guid: e406c04157c663a43b859646b7ad3c2a, type: 3}
+  winMusic: {fileID: 8300000, guid: d705ee32c77a6a649bc770a0f1abdd06, type: 3}
+  loseMusic: {fileID: 8300000, guid: 1b47d3cf9e7985f4fb104d38d23ca197, type: 3}
 --- !u!1001 &277336885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1791,6 +1808,14 @@ PrefabInstance:
       value: Damageable (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7283598925734304358, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
+      propertyPath: m_Size.y
+      value: 1.9670506
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283598925734304358, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.053725243
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283598925734304358, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 1.1260589
       objectReference: {fileID: 0}
@@ -2237,6 +2262,14 @@ PrefabInstance:
     - target: {fileID: 7283598925734304356, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
       propertyPath: m_Name
       value: Damageable (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283598925734304358, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
+      propertyPath: m_Size.x
+      value: 7.94843
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283598925734304358, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.00000047683716
       objectReference: {fileID: 0}
     - target: {fileID: 7283598925734304358, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
@@ -14591,6 +14624,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 705927908}
     - target: {fileID: 856505059538831356, guid: 7f9b67d65ff45ef4fa4ad63730af261f, type: 3}
+      propertyPath: winSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d705ee32c77a6a649bc770a0f1abdd06, type: 3}
+    - target: {fileID: 856505059538831356, guid: 7f9b67d65ff45ef4fa4ad63730af261f, type: 3}
       propertyPath: loseSound
       value: 
       objectReference: {fileID: 8300000, guid: 1b47d3cf9e7985f4fb104d38d23ca197, type: 3}
@@ -14607,6 +14644,10 @@ PrefabInstance:
       value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 856505059538831356, guid: 7f9b67d65ff45ef4fa4ad63730af261f, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1776359813}
+    - target: {fileID: 856505059538831356, guid: 7f9b67d65ff45ef4fa4ad63730af261f, type: 3}
       propertyPath: damagedClip
       value: 
       objectReference: {fileID: 8300000, guid: 9b1bb1f450b7d444fa4a8019d13519a7, type: 3}
@@ -14614,6 +14655,10 @@ PrefabInstance:
       propertyPath: fixedAmount
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 856505059538831356, guid: 7f9b67d65ff45ef4fa4ad63730af261f, type: 3}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: e406c04157c663a43b859646b7ad3c2a, type: 3}
     - target: {fileID: 856505059538831356, guid: 7f9b67d65ff45ef4fa4ad63730af261f, type: 3}
       propertyPath: projectilePrefab
       value: 
@@ -15293,6 +15338,14 @@ PrefabInstance:
     - target: {fileID: 7283598925734304356, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
       propertyPath: m_Name
       value: Damageable
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283598925734304358, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
+      propertyPath: m_Size.x
+      value: 8.091698
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283598925734304358, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.07163334
       objectReference: {fileID: 0}
     - target: {fileID: 7283598925734304358, guid: a6025760d7ca06b4fac7c8aef911570b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x

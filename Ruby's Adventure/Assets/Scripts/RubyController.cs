@@ -13,7 +13,7 @@ public class RubyController : MonoBehaviour
     public int health { get { return currentHealth; } }
     public int cogs { get { return currentCogs; } }
 
-    int currentHealth;
+    public static int currentHealth;
 
     Rigidbody2D rigidbody2d;
     float horizontal;
@@ -28,7 +28,7 @@ public class RubyController : MonoBehaviour
 
     public GameObject projectilePrefab;
 
-    AudioSource audioSource;
+    public AudioSource audioSource;
     public AudioClip damagedClip;
     public AudioClip throwClip;
     public AudioClip winSound;
@@ -121,6 +121,7 @@ public class RubyController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            audioSource.Stop();
             GameOver();
         }
 
@@ -144,6 +145,15 @@ public class RubyController : MonoBehaviour
 
             rigidbody2d.MovePosition(position);
         }
+        /*if (currentHealth <= 0)
+        {
+            GameOver();
+        }
+
+        if (EnemyController.win == true)
+        {
+            Win();
+        }*/
     }
     public void ChangeHealth(int amount)
     {
@@ -175,7 +185,7 @@ public class RubyController : MonoBehaviour
     }
     void GameOver()
     {
-        PlaySound(loseSound);
+        //PlaySound(loseSound);
         isDead = true;
         loseText.SetActive(true);
         if (Input.GetKeyDown(KeyCode.R))
@@ -186,7 +196,7 @@ public class RubyController : MonoBehaviour
 
     public void Win()
     {
-        PlaySound(winSound);
+        //PlaySound(winSound);
         winText.SetActive(true);
         if (Input.GetKeyDown(KeyCode.R))
         {
