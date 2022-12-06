@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6631000176827358336}
   - component: {fileID: 2513666976030060074}
   - component: {fileID: 2923833073622863411}
-  - component: {fileID: 8488751472547489498}
-  m_Layer: 0
+  - component: {fileID: -6522511974608845482}
+  m_Layer: 12
   m_Name: BotHard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8488751472547489498
+--- !u!114 &-6522511974608845482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,13 +262,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6891770511809512607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3a753aa55fb744aa6c649c7c925c65, type: 3}
+  m_Script: {fileID: 11500000, guid: 358f0a2a6b364904fb3789fc657f3b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 1
   vertical: 0
   changeTime: 3
+  hard: 1
   smokeEffect: {fileID: 6484059326074138196, guid: b3ec615766ddb074ea1cb7e9dcf8acc8, type: 3}
+  deathSound: {fileID: 8300000, guid: 8aed654fa38ea82499b5ea19f057c8cb, type: 3}
+  fixedAmount: {fileID: 7270588334848847243, guid: 92844cd1937dacd489d0e30e561fbdd8, type: 3}
 --- !u!1001 &3723311749803017685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -279,6 +282,10 @@ PrefabInstance:
     - target: {fileID: 3397840686183675172, guid: b3ec615766ddb074ea1cb7e9dcf8acc8, type: 3}
       propertyPath: m_Name
       value: Smoke Effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397840686183675172, guid: b3ec615766ddb074ea1cb7e9dcf8acc8, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7605763412407617922, guid: b3ec615766ddb074ea1cb7e9dcf8acc8, type: 3}
       propertyPath: m_RootOrder

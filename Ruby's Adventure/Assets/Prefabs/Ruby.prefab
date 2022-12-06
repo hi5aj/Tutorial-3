@@ -107,9 +107,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4963602493915120722, guid: d36fe8240151b1d4dabac7db96f38ee6, type: 3}
   damagedClip: {fileID: 0}
   throwClip: {fileID: 0}
-  damaged: {fileID: 1554009511777644575, guid: e24811cc3e3e87544931487edd15d359, type: 3}
-  fixedBots: 0
-  fixedAmount: {fileID: 4401369420668545223, guid: ab0306f54077f2442a8e333f95bfd7af, type: 3}
+  damaged: {fileID: 1654772211060917961, guid: e24811cc3e3e87544931487edd15d359, type: 3}
+  loseText: {fileID: 0}
+  cogsText: {fileID: 0}
 --- !u!50 &8482266859916393679
 Rigidbody2D:
   serializedVersion: 4

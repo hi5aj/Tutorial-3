@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2196961443556194079}
   - component: {fileID: 2513666976030060074}
   - component: {fileID: 2923833073622863411}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,10 @@ MonoBehaviour:
   speed: 2
   vertical: 0
   changeTime: 3
+  hard: 0
   smokeEffect: {fileID: 6484059326074138196, guid: b3ec615766ddb074ea1cb7e9dcf8acc8, type: 3}
+  deathSound: {fileID: 8300000, guid: 8aed654fa38ea82499b5ea19f057c8cb, type: 3}
+  fixedAmount: {fileID: 7023260677080909621, guid: 92844cd1937dacd489d0e30e561fbdd8, type: 3}
 --- !u!95 &2513666976030060074
 Animator:
   serializedVersion: 4
@@ -279,6 +282,10 @@ PrefabInstance:
     - target: {fileID: 3397840686183675172, guid: b3ec615766ddb074ea1cb7e9dcf8acc8, type: 3}
       propertyPath: m_Name
       value: Smoke Effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397840686183675172, guid: b3ec615766ddb074ea1cb7e9dcf8acc8, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7605763412407617922, guid: b3ec615766ddb074ea1cb7e9dcf8acc8, type: 3}
       propertyPath: m_RootOrder

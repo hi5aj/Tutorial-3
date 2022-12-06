@@ -11,12 +11,8 @@ public class CogsCollectible : MonoBehaviour
         RubyController controller = other.GetComponent<RubyController>();
         if (controller != null)
         {
-            if (controller.cogs < 4)
-            {
                 controller.Reload();
                 Destroy(gameObject);
-
-            }
         }
     }
 }

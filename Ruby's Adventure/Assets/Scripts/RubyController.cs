@@ -21,6 +21,7 @@ public class RubyController : MonoBehaviour
 
     bool isInvincible;
     float invincibleTimer;
+    bool isDead;
 
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
@@ -30,11 +31,17 @@ public class RubyController : MonoBehaviour
     AudioSource audioSource;
     public AudioClip damagedClip;
     public AudioClip throwClip;
+    public AudioClip winSound;
+    public AudioClip loseSound;
 
-    public ParticleSystem damaged;
+    public GameObject damaged;
     public GameObject loseText;
+    public GameObject winText;
     public Text cogsText;
     int currentCogs;
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
 
     // Start is called before the first frame update
     void Start()
@@ -47,8 +54,13 @@ public class RubyController : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         loseText.SetActive(false);
+        winText.SetActive(false);
         currentCogs = 4;
         cogsText.text = "Cogs: " + currentCogs;
+        isDead = false;
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
     }
     public void PlaySound(AudioClip clip)
     {
@@ -81,7 +93,7 @@ public class RubyController : MonoBehaviour
                 isInvincible = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.C) && currentCogs > 0)
+        if (Input.GetKeyDown(KeyCode.C) && currentCogs > 0 && isDead != true)
         {
             Launch();
         }
@@ -92,16 +104,29 @@ public class RubyController : MonoBehaviour
             if (hit.collider != null)
             {
                 NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
+                if (EnemyController.win == true)
+                {
+                    SceneManager.LoadScene(sceneName: "Level 2");
+                }
                 if (character != null)
                 {
                     character.DisplayDialog();
                 }
             }
         }
+        if (Input.GetKeyDown(KeyCode.Space) && isDead != true)
+        {
+            Attack();
+        }
 
         if (currentHealth <= 0)
         {
             GameOver();
+        }
+
+        if (EnemyController.win == true)
+        {
+            Win();
         }
 
         /*if (Input.GetButtonDown(KeyCode.C))
@@ -111,11 +136,14 @@ public class RubyController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector2 position = rigidbody2d.position;
-        position.x = position.x + speed * horizontal * Time.deltaTime;
-        position.y = position.y + speed * vertical * Time.deltaTime;
+        if (isDead != true)
+        {
+            Vector2 position = rigidbody2d.position;
+            position.x = position.x + speed * horizontal * Time.deltaTime;
+            position.y = position.y + speed * vertical * Time.deltaTime;
 
-        rigidbody2d.MovePosition(position);
+            rigidbody2d.MovePosition(position);
+        }
     }
     public void ChangeHealth(int amount)
     {
@@ -127,7 +155,7 @@ public class RubyController : MonoBehaviour
             isInvincible = true;
             invincibleTimer = timeInvincible;
             PlaySound(damagedClip);
-            damaged.Play();
+            damaged.SetActive(true);
         }
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
@@ -147,15 +175,57 @@ public class RubyController : MonoBehaviour
     }
     void GameOver()
     {
+        PlaySound(loseSound);
+        isDead = true;
         loseText.SetActive(true);
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+
+    public void Win()
+    {
+        PlaySound(winSound);
+        winText.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    public void BadEnd()
+    {
+
+    }
+
     public void Reload()
     {
         currentCogs = 4;
+    }
+    void Attack()
+    {
+        // Play attack animation
+        animator.SetTrigger("Launch");
+
+        // Detect enemies in range of attack
+        Collider2D[] hitEnemeies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        // Damage enemeis
+        foreach(Collider2D enemy in hitEnemeies)
+        {
+            Debug.Log("We hit" + enemy.name);
+            enemy.GetComponent<EnemyController>().Killed();
+        }
+
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
 }

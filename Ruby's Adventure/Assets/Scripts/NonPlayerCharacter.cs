@@ -31,4 +31,6 @@ public class NonPlayerCharacter : MonoBehaviour
         timerDisplay = displayTime;
         dialogBox.SetActive(true);
     }
+
+  
 }

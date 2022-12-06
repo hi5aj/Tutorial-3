@@ -1,28 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
+
+    AudioSource audioSource;
     public float speed = 1.0f;
     public bool vertical;
     public float changeTime = 3.0f;
+    public bool hard;
+    public static bool win;
+    public static bool badEnd;
+    RubyController text;
 
     Rigidbody2D rigidbody2D;
     float timer;
     int direction = 1;
     bool broken = true;
     public ParticleSystem smokeEffect;
-    RubyController bots;
+
+    public AudioClip deathSound;
+
+
+    public static int fixedBots;
+    public Text fixedAmount;
+
+    public Text killedAmount;
+    public static int killedBots;
+
 
     Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         timer = changeTime;
         animator = GetComponent<Animator>();
+        fixedBots = 0;
+        killedBots = 0;
+        fixedAmount.text = "Robots Fixed: " + fixedBots.ToString() + "/5";
+        win = false;
+        badEnd = false;
+
+        if (hard == true)
+        {
+            speed = 3.0f;
+        }
+
+    }
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 
     void Update()
@@ -40,6 +73,7 @@ public class EnemyController : MonoBehaviour
             direction = -direction;
             timer = changeTime;
         }
+
     }
 
     void FixedUpdate()
@@ -71,7 +105,14 @@ public class EnemyController : MonoBehaviour
 
         if (player != null)
         {
-            player.ChangeHealth(-1);
+            if (hard == false)
+            {
+                player.ChangeHealth(-1);
+            }
+            else
+            {
+                player.ChangeHealth(-2);
+            }
         }
     }
     public void Fix()
@@ -80,5 +121,47 @@ public class EnemyController : MonoBehaviour
         rigidbody2D.simulated = false;
         smokeEffect.Stop();
         animator.SetTrigger("Fixed");
+        fixedBots += 1;
+        fixedAmount.text = "Robots Fixed: " + fixedBots.ToString() + "/5";
+        if (fixedBots == 5 )
+        {
+            win = true;
+        }
+        if (fixedBots + killedBots == 5)
+        {
+            win = true;
+        }
+    }
+
+    public void Killed()
+    {
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        PlaySound(deathSound);
+        animator.SetTrigger("Dead");
+        rigidbody2D.simulated = false;
+        Destroy(gameObject, 0.5f);
+        killedBots += 1;
+        killedAmount.text = "Kills: " + killedBots.ToString();
+        if (killedBots == 5 && sceneName == "MainScene")
+        {
+            win = true;
+         }
+        if (killedBots == 5 && sceneName == "Level 2")
+        {
+            SceneManager.LoadScene(sceneName: "BadEnd");
+        }
+        if (fixedBots + killedBots == 5)
+        {
+            win = true;
+        }
+
+    }
+
+    public void Win()
+    {
+        
     }
 }

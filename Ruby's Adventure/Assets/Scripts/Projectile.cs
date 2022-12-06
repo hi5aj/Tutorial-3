@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class Projectile : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
-    RubyController bots;
     public int fixedBots;
-    
 
 
     // Start is called before the first frame update
@@ -41,14 +39,12 @@ public class Projectile : MonoBehaviour
         if (e != null)
         {
             e.Fix();
-            fixedBots += 1;
         }
 
         EnemyHard h = other.collider.GetComponent<EnemyHard>();
         if (h != null)
         {
             h.Fix();
-            fixedBots += 1;
         }
 
         Destroy(gameObject);

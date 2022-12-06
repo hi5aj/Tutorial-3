@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class DamageZone : MonoBehaviour
 {
+    Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void OnTriggerStay2D(Collider2D other)
     {
         RubyController controller = other.GetComponent<RubyController>();
@@ -12,5 +19,7 @@ public class DamageZone : MonoBehaviour
         {
             controller.ChangeHealth(-1);
         }
+        animator.SetTrigger("Stained");
+
     }
 }
